@@ -27,6 +27,8 @@
 
 #include <nat/lib/nat_inlines.h>
 #include <nat/lib/ipfix_logging.h>
+#include <nat/lib/nat_syslog.h>
+
 
 #include <nat/nat44-ed/nat44_ed.h>
 #include <nat/nat44-ed/nat44_ed_inlines.h>
@@ -527,7 +529,7 @@ slow_path_ed (vlib_main_t *vm, snat_main_t *sm, vlib_buffer_t *b,
   nat_syslog_nat44_sadd (0, s->in2out.fib_index, &s->in2out.addr,
 			 s->in2out.port, &s->ext_host_nat_addr,
 			 s->ext_host_nat_port, &s->out2in.addr, s->out2in.port,
-			 &s->ext_host_addr, s->ext_host_port, s->nat_proto, 0);
+			 &s->ext_host_addr, s->ext_host_port, nat_proto_to_ip_proto(s->nat_proto), 0);
 
   per_vrf_sessions_register_session (s, thread_index);
 

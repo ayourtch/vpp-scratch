@@ -254,7 +254,7 @@ nat_free_session_data (snat_main_t * sm, snat_session_t * s, u32 thread_index,
 	nat_syslog_nat44_sdel (
 	  0, s->in2out.fib_index, &s->in2out.addr, s->in2out.port,
 	  &s->ext_host_nat_addr, s->ext_host_nat_port, &s->out2in.addr,
-	  s->out2in.port, &s->ext_host_addr, s->ext_host_port, s->nat_proto,
+	  s->out2in.port, &s->ext_host_addr, s->ext_host_port, nat_proto_to_ip_proto(s->nat_proto),
 	  nat44_ed_is_twice_nat_session (s));
 
       if (snat_is_unk_proto_session (s))

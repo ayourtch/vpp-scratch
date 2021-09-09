@@ -590,7 +590,7 @@ create_session_for_static_mapping_ed (
   nat_syslog_nat44_sadd (0, s->in2out.fib_index, &s->in2out.addr,
 			 s->in2out.port, &s->ext_host_nat_addr,
 			 s->ext_host_nat_port, &s->out2in.addr, s->out2in.port,
-			 &s->ext_host_addr, s->ext_host_port, s->nat_proto,
+			 &s->ext_host_addr, s->ext_host_port, nat_proto_to_ip_proto(s->nat_proto),
 			 nat44_ed_is_twice_nat_session (s));
 
   per_vrf_sessions_register_session (s, thread_index);
