@@ -308,7 +308,7 @@ typedef CLIB_PACKED(struct
     u16 port;
   } in2out;
 
-  nat_protocol_t nat_proto;
+  ip_protocol_t proto;
 
   nat_6t_flow_t i2o;
   nat_6t_flow_t o2i;
@@ -426,7 +426,7 @@ typedef struct
   u32 vrf_id;
   u32 fib_index;
   /* protocol */
-  nat_protocol_t proto;
+  ip_protocol_t proto;
   /* 0 = disabled, otherwise client IP affinity sticky time in seconds */
   u32 affinity;
   /* worker threads used by backends/local host */
@@ -455,7 +455,7 @@ typedef struct
   u16 e_port;
   u32 sw_if_index;
   u32 vrf_id;
-  nat_protocol_t proto;
+  ip_protocol_t proto;
   u32 flags;
   int addr_only;
   int twice_nat;
@@ -500,15 +500,10 @@ u32 nat44_ed_get_out2in_worker_index (vlib_buffer_t *b, ip4_header_t *ip,
 
 /* Return worker thread index for given packet */
 /* NAT address and port allocation function */
-typedef int (nat_alloc_out_addr_and_port_function_t) (snat_address_t *
-						      addresses,
-						      u32 fib_index,
-						      u32 thread_index,
-						      nat_protocol_t proto,
-						      ip4_address_t * addr,
-						      u16 * port,
-						      u16 port_per_thread,
-						      u32 snat_thread_index);
+typedef int (nat_alloc_out_addr_and_port_function_t) (
+  snat_address_t *addresses, u32 fib_index, u32 thread_index,
+  ip_protocol_t proto, ip4_address_t *addr, u16 *port, u16 port_per_thread,
+  u32 snat_thread_index);
 
 typedef struct snat_main_s
 {
@@ -908,25 +903,25 @@ int nat44_ed_add_interface_address (u32 sw_if_index, u8 twice_nat);
 int nat44_ed_del_interface_address (u32 sw_if_index, u8 twice_nat);
 
 int nat44_ed_add_static_mapping (ip4_address_t l_addr, ip4_address_t e_addr,
-				 u16 l_port, u16 e_port, nat_protocol_t proto,
+				 u16 l_port, u16 e_port, ip_protocol_t proto,
 				 u32 vrf_id, u32 sw_if_index, u32 flags,
 				 ip4_address_t pool_addr, u8 *tag);
 
 int nat44_ed_del_static_mapping (ip4_address_t l_addr, ip4_address_t e_addr,
-				 u16 l_port, u16 e_port, nat_protocol_t proto,
+				 u16 l_port, u16 e_port, ip_protocol_t proto,
 				 u32 vrf_id, u32 sw_if_index, u32 flags);
 
 int nat44_ed_add_lb_static_mapping (ip4_address_t e_addr, u16 e_port,
-				    nat_protocol_t proto,
+				    ip_protocol_t proto,
 				    nat44_lb_addr_port_t *locals, u32 flags,
 				    u8 *tag, u32 affinity);
 
 int nat44_ed_del_lb_static_mapping (ip4_address_t e_addr, u16 e_port,
-				    nat_protocol_t proto, u32 flags);
+				    ip_protocol_t proto, u32 flags);
 
 int nat44_ed_add_del_lb_static_mapping_local (ip4_address_t e_addr, u16 e_port,
 					      ip4_address_t l_addr, u16 l_port,
-					      nat_protocol_t proto, u32 vrf_id,
+					      ip_protocol_t proto, u32 vrf_id,
 					      u8 probability, u8 is_add);
 
 /**
