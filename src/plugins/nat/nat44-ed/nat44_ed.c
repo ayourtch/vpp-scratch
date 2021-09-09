@@ -278,8 +278,15 @@ nat_free_session_data (snat_main_t * sm, snat_session_t * s, u32 thread_index,
 	return;
 
       snat_free_outside_address_and_port (sm->addresses, thread_index,
-					  &s->out2in.addr, s->out2in.port,
-					  s->nat_proto);
+                                         &s->out2in.addr, s->out2in.port,
+                                         s->nat_proto);
+  if (!is_ha)
+    {
+      /* log NAT event */
+      nat_ipfix_logging_nat44_ses_delete (
+	thread_index, s->in2out.addr.as_u32, s->out2in.addr.as_u32, s->proto,
+	s->in2out.port, s->out2in.port, s->in2out.fib_index);
+    }
 }
 
 static int
