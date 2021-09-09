@@ -25,7 +25,6 @@
 #include <vnet/udp/udp_local.h>
 #include <vppinfra/error.h>
 
-#include <nat/lib/nat_syslog.h>
 #include <nat/lib/nat_inlines.h>
 #include <nat/lib/ipfix_logging.h>
 

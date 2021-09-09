@@ -20,6 +20,7 @@
 #define __included_nat_syslog_h__
 
 #include <nat/lib/lib.h>
+#include <nat/lib/nat_proto.h>
 
 void nat_syslog_nat44_apmadd (u32 ssubix, u32 sfibix, ip4_address_t * isaddr,
 			      u16 isport, ip4_address_t * xsaddr, u16 xsport,
