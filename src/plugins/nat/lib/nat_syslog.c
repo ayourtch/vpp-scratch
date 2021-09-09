@@ -23,38 +23,7 @@
 #include <nat/lib/nat_syslog.h>
 #include <nat/lib/inlines.h>
 
-#define NAT_FACILITY SYSLOG_FACILITY_LOCAL0
-
-#define NAT_APPNAME "NAT"
-
-#define SADD_SDEL_SEVERITY SYSLOG_SEVERITY_INFORMATIONAL
-#define APMADD_APMDEL_SEVERITY SYSLOG_SEVERITY_INFORMATIONAL
-
-#define SADD_MSGID "SADD"
-#define SDEL_MSGID "SDEL"
-#define APMADD_MSGID "APMADD"
-#define APMDEL_MSGID "APMDEL"
-
-#define NSESS_SDID "nsess"
-#define NAPMAP_SDID "napmap"
-
-#define SSUBIX_SDPARAM_NAME "SSUBIX"
-#define SVLAN_SDPARAM_NAME "SVLAN"
-#define IATYP_SDPARAM_NAME "IATYP"
-#define ISADDR_SDPARAM_NAME "ISADDR"
-#define ISPORT_SDPARAM_NAME "ISPORT"
-#define IDADDR_SDPARAM_NAME "IDADDR"
-#define IDPORT_SDPARAM_NAME "IDPORT"
-#define XATYP_SDPARAM_NAME "XATYP"
-#define XSADDR_SDPARAM_NAME "XSADDR"
-#define XSPORT_SDPARAM_NAME "XSPORT"
-#define XDADDR_SDPARAM_NAME "XDADDR"
-#define XDPORT_SDPARAM_NAME "XDPORT"
-#define PROTO_SDPARAM_NAME "PROTO"
-#define SV6ENC_SDPARAM_NAME "SV6ENC"
-
-#define IATYP_IPV4 "IPv4"
-#define IATYP_IPV6 "IPv6"
+#include <nat/lib/nat_syslog_constants.h>
 
 static inline void
 nat_syslog_nat44_apmap (u32 ssubix, u32 sfibix, ip4_address_t * isaddr,
