@@ -284,7 +284,7 @@ nat_free_session_data (snat_main_t * sm, snat_session_t * s, u32 thread_index,
     {
       /* log NAT event */
       nat_ipfix_logging_nat44_ses_delete (
-	thread_index, s->in2out.addr.as_u32, s->out2in.addr.as_u32, s->proto,
+	thread_index, s->in2out.addr.as_u32, s->out2in.addr.as_u32, nat_proto_to_ip_proto(s->nat_proto),
 	s->in2out.port, s->out2in.port, s->in2out.fib_index);
     }
 }
